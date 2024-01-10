@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchemcha <mchemcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/23 13:52:19 by mchemcha          #+#    #+#             */
-/*   Updated: 2024/01/10 18:10:17 by mchemcha         ###   ########.fr       */
+/*   Created: 2024/01/09 20:13:20 by mchemcha          #+#    #+#             */
+/*   Updated: 2024/01/10 15:24:18 by mchemcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_read_line(char *s)
 {
-    int		i;
-    char	*rst;
+	int i;
+	char *rst;
 
 	i = 0;
 	if(!s)
@@ -34,9 +34,9 @@ char	*ft_read_line(char *s)
 
 char	*ft_read_afterline(char *s)
 {
-	int		i;
-	char	*stat;
-
+	int i;
+	char *stat;
+	
 	i = 0;
 	if (!s)
 		return (free(s),NULL);
@@ -56,32 +56,42 @@ char	*ft_read_afterline(char *s)
 char	*get_next_line(int fd)
 {
 	char		*rst;
-	char		*buffer;
-	int			read_byte;
-	static char	*s;
-
+    char		*buffer;
+    int			read_byte;
+    static char	*s[OPEN_MAX];
+	
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!s)
-		s = ft_strdup("");
+	if (!s[fd])
+		s[fd] = ft_strdup("");
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return(NULL);
+		return(free(buffer), buffer = NULL, NULL);
 	while (1)
 	{
-		if (ft_strchr(s, '\n'))
+		if (ft_strchr(s[fd], '\n'))
 			break;
 		read_byte = read(fd, buffer, BUFFER_SIZE);
 		if (read_byte == 0)
 			break;
 		if (read_byte == -1)
-			return (free (buffer), free(s), s = NULL, NULL);
+			return (free (buffer), free(s[fd]), s[fd] = NULL, NULL);
 		buffer[read_byte] = '\0';
-		s = ft_strjoin(s, buffer);
+		s[fd] = ft_strjoin(s[fd], buffer);
 	}
-	rst = ft_read_line(s);
+	free (buffer);
+	rst = ft_read_line(s[fd]);
 	if(rst == NULL)
-		return (free(s),free(buffer) ,s = NULL, NULL);
-	s = ft_read_afterline(s);
-	return (free (buffer), rst);
+	{
+		free(s[fd]);
+		s[fd] = NULL;
+	}
+	s[fd] = ft_read_afterline(s[fd]);
+	return (rst);
 }
+
+// int main()
+// {
+//     int fd = open("TEST.txt",O_RDONLY, 0777);
+//     printf("%s", get_next_line(fd));
+// }

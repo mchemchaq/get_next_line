@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_bonus_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchemcha <mchemcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/23 13:52:13 by mchemcha          #+#    #+#             */
-/*   Updated: 2024/01/10 19:53:31 by mchemcha         ###   ########.fr       */
+/*   Created: 2024/01/09 20:12:02 by mchemcha          #+#    #+#             */
+/*   Updated: 2024/01/09 20:12:03 by mchemcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+
+#include "get_next_line_bonus.h"
 #include <stdio.h>
 
 void	*ft_calloc(size_t count, size_t size)
@@ -91,7 +92,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		str[j + s1_len] = s2[j];
 		j++;
 	}
-	return (free(s1),s1 = NULL, str);
+	return (free(s1),s1 = NULL, str);//khsioh
 }
 size_t	ft_strlen(const char *str)
 {

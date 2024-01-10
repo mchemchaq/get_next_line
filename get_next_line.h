@@ -6,7 +6,7 @@
 /*   By: mchemcha <mchemcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 13:47:24 by mchemcha          #+#    #+#             */
-/*   Updated: 2024/01/07 18:24:53 by mchemcha         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:29:20 by mchemcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include <stdlib.h>
 
 #ifndef BUFFER_SIZE 
-#define BUFFER_SIZE 10000
+#define BUFFER_SIZE 10
 #endif
 
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char    *ft_1(char *s);
-char    *ft_2(char *s);
+char	*ft_read_line(char *s);
+char	*ft_read_afterline(char *s);
 void	*ft_calloc(size_t count, size_t size);
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *str);
