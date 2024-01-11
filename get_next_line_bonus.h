@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchemcha <mchemcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/11 16:25:55 by mchemcha          #+#    #+#             */
+/*   Updated: 2024/01/11 16:27:32 by mchemcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-#include <sys/syslimits.h>
+# include <stdio.h>
+# include <sys/syslimits.h>
 
-#ifndef BUFFER_SIZE 
-#define BUFFER_SIZE 10
-#endif
-
+# ifndef BUFFER_SIZE 
+#  define BUFFER_SIZE 10
+# endif
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_read_line(char *s);

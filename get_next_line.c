@@ -6,7 +6,7 @@
 /*   By: mchemcha <mchemcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 13:52:19 by mchemcha          #+#    #+#             */
-/*   Updated: 2024/01/10 18:10:17 by mchemcha         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:23:57 by mchemcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 char	*ft_read_line(char *s)
 {
-    int		i;
-    char	*rst;
+	int		i;
+	char	*rst;
 
 	i = 0;
-	if(!s)
-		return NULL;
-	while(s[i])
+	if (!s)
+		return (NULL);
+	while (s[i])
 	{
-		if(s[i] == '\n')
-			break;
+		if (s[i] == '\n')
+			break ;
 		i++;
 	}
-	if (i == 0 && s[i]== '\0')
+	if (i == 0 && s[i] == '\0')
 		return (NULL);
 	rst = ft_substr(s, 0, i + 1);
 	return (rst);
@@ -39,13 +39,13 @@ char	*ft_read_afterline(char *s)
 
 	i = 0;
 	if (!s)
-		return (free(s),NULL);
+		return (free(s), NULL);
 	while (s && s[i])
 	{
 		if (s[i] != '\n')
 			i++;
 		else
-			break;
+			break ;
 	}
 	if (s[i] == '\n')
 		i++;
@@ -53,11 +53,29 @@ char	*ft_read_afterline(char *s)
 	return (free(s), stat);
 }
 
+int	ft_f(char *buffer, char **s, int fd)
+{
+	int	read_byte;
+
+	while (1)
+	{
+		if (ft_strchr(*s, '\n'))
+			break ;
+		read_byte = read(fd, buffer, BUFFER_SIZE);
+		if (read_byte == 0)
+			break ;
+		if (read_byte == -1)
+			return (free (buffer), free (*s), *s = NULL, 1);
+		buffer[read_byte] = '\0';
+		*s = ft_strjoin(*s, buffer);
+	}
+	return (0);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*rst;
 	char		*buffer;
-	int			read_byte;
 	static char	*s;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -66,22 +84,12 @@ char	*get_next_line(int fd)
 		s = ft_strdup("");
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return(NULL);
-	while (1)
-	{
-		if (ft_strchr(s, '\n'))
-			break;
-		read_byte = read(fd, buffer, BUFFER_SIZE);
-		if (read_byte == 0)
-			break;
-		if (read_byte == -1)
-			return (free (buffer), free(s), s = NULL, NULL);
-		buffer[read_byte] = '\0';
-		s = ft_strjoin(s, buffer);
-	}
+		return (NULL);
+	if (ft_f(buffer, &s, fd))
+		return (NULL);
 	rst = ft_read_line(s);
-	if(rst == NULL)
-		return (free(s),free(buffer) ,s = NULL, NULL);
+	if (rst == NULL)
+		return (free(s), free(buffer), s = NULL, NULL);
 	s = ft_read_afterline(s);
 	return (free (buffer), rst);
 }
