@@ -6,7 +6,7 @@
 /*   By: mchemcha <mchemcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 13:52:19 by mchemcha          #+#    #+#             */
-/*   Updated: 2024/01/11 16:23:57 by mchemcha         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:01:07 by mchemcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	static char	*s;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
 		return (NULL);
 	if (!s)
 		s = ft_strdup("");

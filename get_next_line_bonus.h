@@ -6,7 +6,7 @@
 /*   By: mchemcha <mchemcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:25:55 by mchemcha          #+#    #+#             */
-/*   Updated: 2024/01/11 16:27:32 by mchemcha         ###   ########.fr       */
+/*   Updated: 2024/01/16 09:52:41 by mchemcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/syslimits.h>
+# include <limits.h>
 
 # ifndef BUFFER_SIZE 
 #  define BUFFER_SIZE 10
